@@ -20,6 +20,7 @@ const app = express();
 export default app; // exports app as the default Object for this module
 // DB Configuration
 import * as DBConfig from "./db";
+/* To be uncommented after adding db connection string to DBConfig
 mongoose.connect(DBConfig.RemoteURI);
 
 const db = mongoose.connection; // alias for the mongoose connection
@@ -30,6 +31,7 @@ db.on("error", function () {
 db.once("open", function () {
   console.log(`Connected to MongoDB at: ${DBConfig.HostName}`);
 });
+*/
 
 app.use(logger("dev"));
 app.use(express.json());
