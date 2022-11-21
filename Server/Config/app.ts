@@ -39,10 +39,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "/static")));
 app.use(express.static(path.join(__dirname, "../../node_modules")));
 
+app.use(cors());
 // perform routing
 app.use("/", indexRouter);
-
-app.use(cors);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
