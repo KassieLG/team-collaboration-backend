@@ -8,6 +8,7 @@ const router = express.Router();
 // instantiate an object of type index controller
 import {
   DisplayHomePage,
+  SearchFlight,
   SearchHotels,
   SearchRooms,
 } from "../Controllers/index";
@@ -19,5 +20,6 @@ router.get("/confirm", Submit);
 router.post("/search-hotels", SearchHotels);
 router.get("/hotels", allHotels);
 router.post("/search-rooms", SearchRooms);
+router.post("/search-flights", SearchFlight);
 
 export default router;
