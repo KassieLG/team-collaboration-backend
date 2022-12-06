@@ -48,7 +48,11 @@ export async function SearchFlight(
 ) {
   let filterString = req.body.date;
   const flightCollection = await flight.find({
-    departure_date: { $regex: new RegExp(filterString) },
+    $and: [
+      { departure_date: { $regex: new RegExp(filterString) } },
+      { from_location: { $regex: new RegExp(req.body.from) } },
+      { to_location: { $regex: new RegExp(req.body.to) } },
+    ],
   });
   res.send(flightCollection);
 }

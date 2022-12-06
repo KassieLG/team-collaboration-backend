@@ -44,7 +44,11 @@ function SearchFlight(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         let filterString = req.body.date;
         const flightCollection = yield flight_1.default.find({
-            departure_date: { $regex: new RegExp(filterString) },
+            $and: [
+                { departure_date: { $regex: new RegExp(filterString) } },
+                { from_location: { $regex: new RegExp(req.body.from) } },
+                { to_location: { $regex: new RegExp(req.body.to) } },
+            ],
         });
         res.send(flightCollection);
     });
