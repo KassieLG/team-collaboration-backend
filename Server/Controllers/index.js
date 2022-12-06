@@ -12,7 +12,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SearchRooms = exports.SearchHotels = exports.DisplayHomePage = void 0;
+exports.SearchFlight = exports.SearchRooms = exports.SearchHotels = exports.DisplayHomePage = void 0;
+const flight_1 = __importDefault(require("../Models/flight"));
 const hotel_1 = __importDefault(require("../Models/hotel"));
 const room_1 = __importDefault(require("../Models/room"));
 function DisplayHomePage(req, res, next) {
@@ -25,7 +26,6 @@ function SearchHotels(req, res, next) {
         const hotelCollection = yield hotel_1.default.find({
             hotel_address: { $regex: new RegExp(filterString), $options: "i" },
         });
-        console.log(filterString);
         res.send(hotelCollection);
     });
 }
@@ -40,4 +40,14 @@ function SearchRooms(req, res, next) {
     });
 }
 exports.SearchRooms = SearchRooms;
+function SearchFlight(req, res, next) {
+    return __awaiter(this, void 0, void 0, function* () {
+        let filterString = req.body.date;
+        const flightCollection = yield flight_1.default.find({
+            departure_date: { $regex: new RegExp(filterString) },
+        });
+        res.send(flightCollection);
+    });
+}
+exports.SearchFlight = SearchFlight;
 //# sourceMappingURL=index.js.map
