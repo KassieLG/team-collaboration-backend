@@ -12,32 +12,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SearchRooms = exports.SearchHotels = exports.DisplayHomePage = void 0;
-const hotel_1 = __importDefault(require("../Models/hotel"));
+exports.Submit = void 0;
 const room_1 = __importDefault(require("../Models/room"));
-function DisplayHomePage(req, res, next) {
-    res.json({ Message: "Welcome to the Quick National Travel" });
-}
-exports.DisplayHomePage = DisplayHomePage;
-function SearchHotels(req, res, next) {
+function Submit(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
-        let filterString = req.body.city;
-        const hotelCollection = yield hotel_1.default.find({
-            hotel_address: { $regex: new RegExp(filterString), $options: "i" },
-        });
-        console.log(filterString);
-        res.send(hotelCollection);
+        const roomCollection = yield room_1.default.find({});
+        return res.status(200).send(roomCollection);
     });
 }
-exports.SearchHotels = SearchHotels;
-function SearchRooms(req, res, next) {
-    return __awaiter(this, void 0, void 0, function* () {
-        let filterString = Number(req.body.id);
-        const roomCollection = yield room_1.default.find({
-            hotel_id: filterString,
-        });
-        res.send(roomCollection);
-    });
-}
-exports.SearchRooms = SearchRooms;
-//# sourceMappingURL=index.js.map
+exports.Submit = Submit;
+//# sourceMappingURL=submit_order.js.map
